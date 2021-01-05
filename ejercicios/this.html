@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Utilizando this</h1>
+        <script>
+            // this en global scope
+            console.log(`this: ${this}`);
+
+            //this dentro de una funcion
+            function whoIsThis() {
+                return this;
+            }
+            console.log(`whoIsThis: ${whoIsThis()}`);
+
+            // this utilizando el modo estricto
+
+            function whoIsThis2() {
+                // use strict nos restring el acceso a this. Ahora no sera global, muestra undefined
+                "use strict";
+                return this;
+            }
+            console.log(`whoIsThis: ${whoIsThis2()}`);
+
+            // this en un objeto
+            const person = {
+                name: "Brandon",
+                saludar: function () {
+                    console.log(`Hola soy ${this.name}`);
+                },
+            };
+            person.saludar();
+            const accion = person.saludar;
+            accion(); // this no existe en el contexto global, muestra vacio
+
+            // this en el contexto de una clase, como si fuera programacion orientada a objetos
+
+            function Perro(name, age) {
+                // estamos simulando un constructor
+                this.name = name;
+                this.age = age;
+            }
+
+            // creamos los metodos de la "clase" mediante prototype
+            Perro.prototype.saludar = function () {
+                console.log(`Guau!! me llamo ${this.name}`);
+            };
+
+            Perro.prototype.decirEdad = function () {
+                console.log(`Tengo ${this.age} años de edad, Guau!!!`);
+            };
+
+            const vicky = new Perro("Vicky", 3);
+            vicky.saludar();
+            vicky.decirEdad();
+        </script>
+    </body>
+</html>
