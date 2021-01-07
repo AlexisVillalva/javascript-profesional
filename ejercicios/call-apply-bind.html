@@ -22,52 +22,68 @@
 
         <script>
             // Establece `this` usando `call`
-            function saludar() {
-                console.log(`Hola. Soy ${this.name} ${this.apellido}`);
+            console.log(
+                "--------- Call pasando un objeto pero sin mas argumentos"
+            );
+            function salute() {
+                console.log(`Hola, yo soy ${this.name} ${this.surname}`);
             }
 
-            const richard = {
-                name: "Richard",
-                apellido: "Kaufman López",
-            };
+            const person = { name: "Alexis", surname: "Villalva" };
 
-            saludar.call(richard);
+            salute.call(person);
 
             // Establece `this` usando `call` y pasar argumentos a la función
-            function caminar(metros, direccion) {
+            console.log(
+                "--------- Call pasando un objeto y argumentos a la funcion"
+            );
+            function walk(metros, direccion) {
                 console.log(
-                    `${this.name} camina ${metros} metros hacia ${direccion}.`
+                    `${this.name} camina ${metros} metros hacia el ${direccion}`
                 );
             }
 
-            caminar.call(richard, 400, "norte");
+            walk.call(person, 400, "norte");
 
             // Establece `this` usando `apply` y pasar argumentos a la función
-            const valores = [800, "noreste"];
-            caminar.apply(richard, valores);
+            const valores = [2000, "sureste"];
+            console.log(" /////// Apply con argumentos ///////");
+            walk.apply(person, valores);
 
             /*
-        Call - comma
-        Apply - arreglo
-      */
+              Call - comma
+              Apply - arreglo
+            */
 
-            // Establecer `this` en una nueva función usando `bind`
-            const daniel = { name: "Daniel", apellido: "Sánchez" };
-            const danielSaluda = saludar.bind(daniel);
-            danielSaluda();
+            // ----------------------------------- Establecer `this` en una nueva función usando `bind`----------------------------------------
 
-            const danielCamina = caminar.bind(daniel, 2000);
-            danielCamina("oeste");
+            console.log(" Utilizand bind ////////");
+            // retorna una nueva funcion con un nuevo contexto
+
+            function ladrar(breed, age) {
+                console.log(
+                    `${this.name} esta ladrando, tiene ${age} anios y es ${breed}`
+                );
+            }
+
+            const perro = { name: "Bob" };
+
+            // estamos utilizando function currying, pasando un valor de forma estatica en el bind y uno de forma dinamica al llamaar ala funcion perroLadrando
+            // nos permite hacer funciones reutilizables
+
+            const perroLadrando = ladrar.bind(perro, "Labrador");
+            perroLadrando(10);
 
             // Cuándo es útil usar uno de estos métodos
-            const buttons = document.getElementsByClassName("call-to-action");
-            // buttons.forEach(button => {
-            //   button.onclick = () => alert('Nunca pares de aprender!');
-            // });
+
+            // cuando por ejemplo, tenemos un arreglo y queremos realizar una accion para cada uno de sus elementos. Y este es un NodeList
 
             // NodeList
-            Array.prototype.forEach.call(buttons, (button) => {
-                button.onclick = () => alert("Nunca pares de aprender!");
+            const buttons = document.getElementsByClassName("call-to-action");
+            console.log(buttons);
+            // nodeElements.forEach();
+            Array.prototype.forEach.call(buttons, (buttona) => {
+                buttona.onclick = () => alert("Nunca pares de aprender");
             });
         </script>
     </body>
