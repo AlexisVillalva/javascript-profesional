@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <p>Event loop</p>
+        <script>
+            function ejecutar() {
+                /*
+                Lo que hará el event loop es ejecutar primero todo el codigo de arriba a abajo,
+                luego agendar las microtareas y tareas a la cola.
+                Las microtareas seran las promesas y las tareas los timeouts, etc.
+                Por lo tanto, primero se ejecutara el start y end.
+                Despues las microtareas por orden, es decir Promesa 1, Promesa 2.
+                Y por ultimo el timeout.
+                Todo esto se introduce a la estructura de datos de Stack que utiliza Javascript
+                */
+                console.log("Start");
+                setTimeout(() => console.log("timeout"), 0);
+                Promise.resolve("Promise 1").then((msg) => console.log(msg));
+                Promise.resolve("Promise 2").then((msg) => console.log(msg));
+                console.log("End");
+            }
+            ejecutar();
+        </script>
+    </body>
+</html>
