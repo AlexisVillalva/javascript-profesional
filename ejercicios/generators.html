@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Generators</h1>
+        <script>
+            console.log("Generators");
+            // los generadores se crean untilizando function*
+            function* idGenerator() {
+                let id = 0;
+
+                while (true) {
+                    // el ciclo while se detiene mediante el yield y permite la ejecucion normal del hilo principal.
+                    id++;
+                    // utilizamos yield para detener el generador y, opcionalmente, devolver un valor.
+                    yield id;
+                }
+            }
+
+            // id generator with reset
+            function* idGeneratorWithReset() {
+                id = 1;
+                let reset;
+                while (true) {
+                    // reset recibe el valor que le pasamos como parametro al metodo .next()
+                    reset = yield id;
+                    if (reset) {
+                        id = 1;
+                    } else {
+                        id++;
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
