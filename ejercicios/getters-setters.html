@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            console.log("Getters y setters");
+            // utilizando el get
+            // const person = {
+            //     name: "Brandon",
+            //     last_name: "Villalva",
+            //     get full_name() {
+            //         return `${this.name} ${this.last_name}`;
+            //     },
+            // };
+            // lo mismo pero utilizando una funcion normal:
+            const person = {
+                name: "Brandon",
+                last_name: "Villalva",
+                full_name: function () {
+                    return `${this.name} ${this.last_name}`;
+                },
+            };
+
+            console.log(`Full name: ${person.full_name()}`);
+
+            // A traves del metodo get, la semantica es mucho mas transparente y mantiene mejor la integridad de la data.
+
+            // utilizando setters
+            const dog = {
+                name: "Firulais",
+                age: 0,
+                set setAge(age) {
+                    this.age = age;
+                },
+                get getAge() {
+                    return `Dog age: ${this.age}`;
+                },
+            };
+
+            dog.setAge = 3;
+            console.log(dog.getAge);
+        </script>
+    </body>
+</html>
