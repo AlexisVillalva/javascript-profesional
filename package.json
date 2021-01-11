@@ -8,9 +8,14 @@
     "platzi"
   ],
   "scripts": {
-    "start": "live-server"
+    "start": "parcel index.html ejecicios/index.html ejercicios/**/*.html"
   },
   "devDependencies": {
-    "live-server": "^1.2.1"
-  }
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.3"
+  },
+  "browserlist": [
+    "last 1 Chrome version"
+  ]
 }
