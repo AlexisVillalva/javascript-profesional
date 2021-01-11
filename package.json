@@ -15,7 +15,7 @@
     "prettier": "^2.2.1",
     "typescript": "^4.1.3"
   },
-  "browserlist": [
-    "last 1 Chrome version"
+  "browserslist": [
+    "last 3 Chrome version"
   ]
 }
