@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Fetch and abort using controller</h1>
+        <img id="huge-image" src="" alt="" />
+        <script>
+            console.log("Fetch");
+
+            const img = document.getElementById("huge-image");
+            var url =
+                "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwallpaperheart.com%2Fwp-content%2Fuploads%2F2018%2F08%2F4k-wallpapers-for-pc-8.jpg&f=1&nofb=1";
+            var controller;
+            async function loadRequest() {
+                // inicializamos el controlador que se encargara de detener la peticion
+                controller = new AbortController();
+
+                try {
+                    // fetch recibe como primer parametro la url, y como segundo parametro opcional, la configuracion personalizada que se desee
+                    // aplicar a la solicitud
+                    const response = await fetch(url, {
+                        signal: controller.signal,
+                    });
+                    // blob devuelve el binario de nuestra peticion
+                    const blob = await response.blob();
+
+                    // con el blob, creamos el objeto URL que debemos pasar a nuestra etiqueta img.
+                    const imgUrl = URL.createObjectURL(blob);
+                    img.src = imgUrl;
+                } catch (error) {
+                    // cuando abort se llama, la promesa fetch se rechaza con un AbortError, por eso tenemos que capturarlo
+                    console.log(error.message);
+                }
+            }
+
+            function stopRequest() {
+                controller.abort();
+            }
+        </script>
+    </body>
+</html>
